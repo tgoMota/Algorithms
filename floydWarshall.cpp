@@ -1,6 +1,6 @@
 //Floyd Warshall algorithm
 //This is a DP algorithm to calculate All-Pairs Shortest Paths and some variants.
-//It's a slow algorithm, because it works clearly in O(V^3) time complexity, but can haldle negative edges
+//It's a slow algorithm, because it works clearly in O(V^3) time complexity, but can handle negative edges
 //and works well for small graphs (V<=~400) and it's simpler to code than the anothers algorithms.
 #include <bits/stdc++.h>
 using namespace std;
@@ -9,8 +9,9 @@ vector<vector<int>> dist;
 void floydWarshall(const int N){
     for(int k = 0; k < N ; ++k){
         for(int i = 0; i < N ; ++i){
+            if(dist[i][k] == oo) continue;
             for(int j = 0; j < N ; ++j){
-                if(dist[i][k] == oo || dist[k][j] == oo) continue;
+                if(dist[k][j] == oo) continue;
                 dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
             }
         }

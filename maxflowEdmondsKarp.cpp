@@ -54,7 +54,7 @@ int main(){
         residual[a][b] = c;
     }
     int source = 0, sink = n-1;
-    printf("%d\n", maxflow(source, sink, n));
+    printf("maxflow = %d\n", maxflow(source, sink, n));
 
     return 0;
 }
