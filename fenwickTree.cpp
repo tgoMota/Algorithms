@@ -20,7 +20,7 @@ struct FenwickTree{
         }
     }
 
-    int get(int idx){ //get the accumulated sum until index idx   //takes O(logN) time complexity
+    int get(int idx){ //get the accumulated sum up to index idx   //takes O(logN) time complexity
         idx++; //increasing one unit because our original vector is 0-indexed (0..N-1), so the idx would be 0
         int sum = 0;
         while(idx>0){
