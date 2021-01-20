@@ -1,6 +1,6 @@
 //FenwickTree algorithm
 //Used for answer prefix sums querys and update values both in O(logN) time complexity
-//For building the tree is O(NlogN) time complexity
+//building the tree takes O(NlogN) time complexity
 #include <bits/stdc++.h>
 using namespace std;
 
