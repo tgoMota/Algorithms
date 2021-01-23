@@ -8,7 +8,6 @@ vector<vector<int>> adj;
 
 int topologicalSort(const int n){
     topSort.clear();
-    vector<bool> vst(n+1, false);
     queue<int> q;
     for(int i = 0; i < n ; ++i){
         if(in_degree[i] == 0) q.push(i);

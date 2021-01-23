@@ -1,5 +1,5 @@
 //Dijkstra's algorithm
-//Algorithm to find the shortest path between two nodes in a graph, but this algo can't handle negative edges
+//Algorithm to find the shortest path between two nodes in a graph, but can't handle negative edges
 //Runs in O(ELog(V)) time complexity
 #include <bits/stdc++.h>
 using namespace std;
