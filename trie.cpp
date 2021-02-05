@@ -1,6 +1,6 @@
 //Trie data structure
 //Insert, search and remove run in ~ O(N) time complexity, where N = string length
-//The space complexity is O(N*M), where N is the number of strings and M is the biggest string on the Tries
+//The space complexity is O(N*M*A), where N is the number of strings, M is the biggest string on the Tries and A is the Alphabet Size
 #include <bits/stdc++.h>
 using namespace std;
 struct Node{
@@ -64,8 +64,22 @@ struct Trie{
     }
 
     bool empty(){
-        return root->m.empty();
+        return (root == nullptr || root->m.empty());
     }
+    
+    void clear_aux(Node* node){
+		for(auto x : node->m){
+			clear_aux(x.second);
+			delete x.second;
+		}
+		node->m.clear();
+	}
+
+	void clear(){
+		clear_aux(root);
+		root->m.clear();
+        delete root;
+	}
 };
 
 int main(){
@@ -100,5 +114,6 @@ int main(){
     cout << t->search("TestingOMG") << '\n';//0
     if(t->empty()) cout << "Trie is empty\n";
     else cout << "Trie is not empty\n";
+    t->clear();
     return 0;
 }
