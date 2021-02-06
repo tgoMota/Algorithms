@@ -1,5 +1,5 @@
 //Trie data structure
-//Insert, search and remove run in ~ O(N) time complexity, where N = string length
+//Insert, search and remove run in O(L) time complexity, where L is the string length
 //The space complexity is O(N*M), which N is the number of strings and M is the biggest string on the Trie
 #include <bits/stdc++.h>
 using namespace std;
