@@ -1,6 +1,6 @@
 //Trie data structure
 //Insert, search and remove run in ~ O(N) time complexity, where N = string length
-//The space complexity is O(N*M*A), where N is the number of strings, M is the biggest string on the Tries and A is the Alphabet Size
+//The space complexity is O(N*M), which N is the number of strings and M is the biggest string on the Trie
 #include <bits/stdc++.h>
 using namespace std;
 struct Node{
@@ -68,18 +68,18 @@ struct Trie{
     }
     
     void clear_aux(Node* node){
-		for(auto x : node->m){
-			clear_aux(x.second);
-			delete x.second;
-		}
-		node->m.clear();
+	for(auto x : node->m){
+	    clear_aux(x.second);
+	    delete x.second;
 	}
+	node->m.clear();
+    }
 
-	void clear(){
-		clear_aux(root);
-		root->m.clear();
-        delete root;
-	}
+    void clear(){
+	clear_aux(root);
+	root->m.clear();
+    	delete root;
+    }
 };
 
 int main(){
