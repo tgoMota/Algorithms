@@ -2,7 +2,7 @@
 //This segment tree can answer range sum querys and modify values in range both in logN time complexity
 #include <bits/stdc++.h>
 using namespace std;
-struct SegTreeLazyProp{
+struct SegTreeSumLazy{
     vector<int> t, lz;
     Seg(const int n){
         t.assign(4*n, 0);
@@ -43,8 +43,8 @@ struct SegTreeLazyProp{
         t[i] = t[2*i] + t[2*i+1];
     }
 };
-int main()[
+int main(){
     
 
     return 0;
-]
+}
