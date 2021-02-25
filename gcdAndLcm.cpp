@@ -3,7 +3,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int gcd(int a, int b){ //Euclid algorithm
+int gcd(int a, int b){ //Euclid's algorithm
     return b == 0 ? a : gcd(b, a%b);
 }
 

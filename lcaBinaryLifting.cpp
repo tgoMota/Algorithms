@@ -5,16 +5,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 struct liftLCA{
-    int log, N;
+    int log, N, root;
     vector<vector<int>> adj, memo;
     vector<int> lv;
     liftLCA(){}
-    liftLCA(const int n){
+    liftLCA(int _root, const int n){
+    	root = _root;
         N = n;
         log = (int)log2(n)+1;
         lv.assign(n+1, 0);
         memo.assign(n+1, vector<int>(log+1, -1));
-        dfs(0,0);
+        dfs(root,root);
     }
 
     void dfs(int v, int p){
