@@ -8,7 +8,7 @@ using namespace std;
 struct CentroidDecomposition{
   int N, log;
   vector<vector<int>> tree, decTree;
-  vector<int> size, lv;
+  vector<int> size;
   vector<bool> isCentroid;
   CentroidDecomposition(){}
   CentroidDecomposition(const int n){
