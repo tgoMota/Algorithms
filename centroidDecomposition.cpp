@@ -43,7 +43,7 @@ struct CentroidDecomposition{
         if(heaviest_child == 0 || size[x] > size[heaviest_child]) heaviest_child = x;
       }
     }
-    if(is_centroid && n-size[v] <= n/2) return v;
+    if(is_centroid && 2*size[v] >= n) return v;
     return getCentroid(heaviest_child, v, n);
   }
 
@@ -59,7 +59,6 @@ struct CentroidDecomposition{
     for(int x : tree[cent_root]){
       if(!isCentroid[x]){
         int cent_sub = decomposeTree(x);
-        parent[cent_sub] = cent_root;
         decTree[cent_root].push_back(cent_sub);
         decTree[cent_sub].push_back(cent_root);
       }
@@ -67,3 +66,8 @@ struct CentroidDecomposition{
     return cent_root;
   }
 }; 
+
+int main(){
+  CentroidDecomposition cd(1000);
+  return 0;
+}
