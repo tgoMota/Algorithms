@@ -1,5 +1,5 @@
 //Kruskal’s algorithm
-//This is a greedy algorithm for find the Minimal Spanning Tree(MST) and some variants.
+//Greedy algorithm for finding the Minimal Spanning Tree(MST) and some variants.
 //This algorithm runs in O(ELog(E)) (or O(ELog(V))) time complexity, once E can be at most V^2.
 #include <bits/stdc++.h>
 using namespace std;

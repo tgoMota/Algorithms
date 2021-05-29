@@ -5,14 +5,11 @@ const int mod = 1e9+7;
 typedef long long ll;
 typedef vector<vector<ll>> mat;
 mat identity(const int n){
-  mat m(n, vector<ll>(n));
-  for(int i = 0; i < n ; ++i){
-    for(int j = 0; j < n ; ++j){
-      m[i][j] = (i == j);
-    }
-  }
+  mat m(n, vector<ll>(n,0LL));
+  for(int i = 0; i < n ; ++i) m[i][i] = 1LL;
   return m;
 }
+
 mat mul(mat& a, mat& b){
   mat c((int)a.size(), vector<ll>((int)b[0].size(), 0LL));
   for(int i = 0; i < (int)a.size() ;  ++i){
