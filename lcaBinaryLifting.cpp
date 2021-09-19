@@ -1,7 +1,7 @@
 //LCA with Binary Lifting
 //Fast way to answer querys of Lowest Common Ancestor(LCA) betweem two nodes in a tree
-//O(V*log2(V)+E) to calculate all the states of the DP
-//O(log2(V)) to solve the LCA
+//O(V*log(V)+E) to calculate all the states of the DP
+//O(log(V)) for query LCA
 #include <bits/stdc++.h>
 using namespace std;
 struct liftLCA{
@@ -9,7 +9,8 @@ struct liftLCA{
     vector<vector<int>> adj, memo;
     vector<int> lv;
     liftLCA(){}
-    liftLCA(int _root, const int n){
+    liftLCA(vector<vector<int>>& _adj, int _root, const int n){
+        adj = _adj;
     	root = _root;
         N = n;
         log = (int)log2(n)+1;
@@ -25,7 +26,7 @@ struct liftLCA{
             memo[v][i] = memo[memo[v][i-1]][i-1];
         }
         for(int x : adj[v]){
-            if(x != p) continue;
+            if(x == p) continue;
             dfs(x, v);
         }
     }
@@ -45,6 +46,11 @@ struct liftLCA{
         }
         return memo[u][0];
     }
+
+    int dist(int u, int v){
+        return lv[u]+lv[v]-2*lv[lca(u,v)];
+    }
+
 };
 
 int main(){
