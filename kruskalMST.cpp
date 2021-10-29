@@ -13,7 +13,8 @@ void buildUF(const int N){
 }
 
 int find(int u){
-    return parent[u] == u ? u : find(parent[u]); 
+    if(parent[u] == u) return u;
+    return parent[u] = find(parent[u]); 
 }
 
 void merge(int u, int v){

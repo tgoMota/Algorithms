@@ -5,7 +5,7 @@
 using namespace std;
 typedef pair<int,int> ii;
 
-class Aho{
+class Aho{ //Implementation with DFS online
     public:
         const static int K = 26;
         struct Node{
@@ -96,6 +96,70 @@ class Aho{
             }
             cout << '\n';
         }
+};
+//Implementation with BFS offline
+struct Aho{
+    vector<bool> out;  
+    vector<int> f;
+    vector<vector<int>> g; 
+    int max_states, max_chars;
+    char lowestChar, highestChar;
+    Aho(){}
+    Aho(const int _max_states, char _lowestChar = 'a', char _highestChar = 'z'){
+      max_states = _max_states+5;
+      out.assign(max_states, false);
+      f.assign(max_states, -1);
+      lowestChar = _lowestChar;
+      highestChar = _highestChar;
+      max_chars = highestChar-lowestChar+1;
+      g.assign(max_states, vector<int>(max_chars, -1));
+    }
+    int build(const vector<string> &words) {
+        int states = 1;   
+        for (int i = 0; i < words.size(); ++i) {
+            const string &keyword = words[i];
+            int currentState = 0;
+            for (int j = 0; j < (int)keyword.size(); ++j) {
+                int c = keyword[j] - lowestChar;
+                if(g[currentState][c] == -1) {
+                    g[currentState][c] = states++;
+                }
+                currentState = g[currentState][c];
+            }
+            out[currentState] = true;
+        }
+        
+        for (int c = 0; c < max_chars; ++c) {
+            if (g[0][c] == -1) {
+                g[0][c] = 0;
+            }
+        }
+        queue<int> q;
+        for (int c = 0; c < max_chars; ++c) {
+            if (g[0][c] > 0) {
+                f[g[0][c]] = 0;
+                q.push(g[0][c]);
+            }
+        }
+        while (!q.empty()) {
+            int state = q.front();
+            q.pop();
+            for (int c = 0; c < max_chars; ++c) {
+                if (g[state][c] != -1) {
+                    int failure = f[state];
+                    while (g[failure][c] == -1) {
+                        failure = f[failure];
+                    }
+                    failure = g[failure][c];
+                    f[g[state][c]] = failure;
+                    out[g[state][c]] = out[g[state][c]] || out[failure];
+                    q.push(g[state][c]);
+                }
+            }
+        }
+
+        return states;
+    }
 };
 
 int main(){
