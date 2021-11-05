@@ -9,7 +9,7 @@ struct kmp{
     }
     void build(){
         const int N = (int)pat.size();
-        tmp.assign(N+1, 0);
+        tmp.assign(N+1, 0); //abababtab
         tmp[0] = -1;
         int i = 0, j = -1;
         while(i < N){
