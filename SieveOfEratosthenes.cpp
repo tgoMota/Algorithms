@@ -6,14 +6,14 @@ using namespace std;
 typedef long long ll;
 vector<bool> prime;
 vector<int> primes;
-void sieve(int _upto){
+void sieve(ll _upto){
     primes.clear();
     _upto++;
     prime.assign(_upto+1, true);
     prime[0] = prime[1] = false;
-    for(int i = 2; i <= _upto ; ++i){
+    for(ll i = 2; i <= _upto ; ++i){
         if(prime[i]){
-            for(int j = i*i; j <= _upto ; j += i) prime[j] = 0;
+            for(ll j = i*i; j <= _upto ; j += i) prime[j] = 0;
             primes.push_back(i);
         }
     }

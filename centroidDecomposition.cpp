@@ -8,7 +8,7 @@ using namespace std;
 struct CentroidDecomposition{
   int N, log;
   vector<vector<int>> tree, decTree;
-  vector<int> size;
+  vector<int> size, parent;
   vector<bool> isCentroid;
   CentroidDecomposition(){}
   CentroidDecomposition(const int n){
@@ -17,6 +17,7 @@ struct CentroidDecomposition{
     decTree.assign(N, vector<int>());
     size.assign(N, 0);
     isCentroid.assign(N, false);
+    parent.assign(N, -1);
   }
 
   void add_edge(int u, int v){
@@ -35,16 +36,15 @@ struct CentroidDecomposition{
   }
 
   int getCentroid(int v, int p, int n){
-    bool is_centroid = true;
-    int heaviest_child = 0;
+    bool is_centroid = (2*size[v] >= n);
+    int heaviest_child = -1;
     for(int x : tree[v]){
       if(x != p && !isCentroid[x]){
-        if(size[x] > n/2) is_centroid = false;
-        if(heaviest_child == 0 || size[x] > size[heaviest_child]) heaviest_child = x;
+        if(2*size[x] >= n) is_centroid = false;
+        if(heaviest_child == -1 || size[x] > size[heaviest_child]) heaviest_child = x;
       }
     }
-    if(is_centroid && 2*size[v] >= n) return v;
-    return getCentroid(heaviest_child, v, n);
+    return is_centroid ? v : getCentroid(heaviest_child, v, n);
   }
 
   int getCentroid(int v){
@@ -61,6 +61,7 @@ struct CentroidDecomposition{
         int cent_sub = decomposeTree(x);
         decTree[cent_root].push_back(cent_sub);
         decTree[cent_sub].push_back(cent_root);
+        parent[cent_sub] = cent_root;
       }
     }
     return cent_root;
@@ -68,6 +69,9 @@ struct CentroidDecomposition{
 }; 
 
 int main(){
-  CentroidDecomposition cd(1000);
+  int n;
+  cin >> n;
+  CentroidDecomposition cd(n);
+  int root = cd.decomposeTree(0);
   return 0;
 }
