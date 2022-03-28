@@ -16,7 +16,7 @@ int Aug(int l) {
 int kuhn(const int n){
   int ans = 0;
   match.assign(n+1, -1);
-  for (int l = 1; l <= n ;l++) {
+  for (int l = 0; l < n ;l++) { //0-indexed //if 1-indexed change to (l = 1; l <= n ; l++)
     vst.assign(n+1, 0);
     ans += Aug(l);
   }
