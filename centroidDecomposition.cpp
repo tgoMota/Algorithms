@@ -6,7 +6,7 @@ using namespace std;
 #define fastio() ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 struct CentroidDecomposition{
-  int N, log;
+  int N;
   vector<vector<int>> tree, decTree;
   vector<int> size, parent;
   vector<bool> isCentroid;
@@ -17,7 +17,6 @@ struct CentroidDecomposition{
     decTree.assign(N, vector<int>());
     size.assign(N, 0);
     isCentroid.assign(N, false);
-    parent.assign(N, -1);
   }
 
   void add_edge(int u, int v){
@@ -36,15 +35,10 @@ struct CentroidDecomposition{
   }
 
   int getCentroid(int v, int p, int n){
-    bool is_centroid = (2*size[v] >= n);
-    int heaviest_child = -1;
     for(int x : tree[v]){
-      if(x != p && !isCentroid[x]){
-        if(2*size[x] >= n) is_centroid = false;
-        if(heaviest_child == -1 || size[x] > size[heaviest_child]) heaviest_child = x;
-      }
+      if(!isCentroid[x] && x != p && 2*size[x] >= n) return getCentroid(x, v, n);
     }
-    return is_centroid ? v : getCentroid(heaviest_child, v, n);
+    return v;
   }
 
   int getCentroid(int v){
@@ -66,7 +60,7 @@ struct CentroidDecomposition{
     }
     return cent_root;
   }
-}; 
+};
 
 int main(){
   int n;
