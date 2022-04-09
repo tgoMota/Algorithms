@@ -3,8 +3,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 struct SegTreeSumLazy{
+    int N;
     vector<int> t, lz;
-    Seg(const int n){
+    SegTreeSumLazy(const int n){
+    	N = n;
         t.assign(4*n, 0);
         lz.assign(4*n, 0);
     }
@@ -28,6 +30,10 @@ struct SegTreeSumLazy{
         return query(2*i, l, m, ql, qr) + query(2*i+1, m+1, r, ql, qr);
     }
 
+    int query(int ql, int qr){
+        return query(1, 0, N-1, ql, qr);
+    }
+
     void update(int i, int l, int r, int ql, int qr, int x){ //O(logN)
         push(i, l, r);
         if(r < ql || l > qr) return;
@@ -41,6 +47,10 @@ struct SegTreeSumLazy{
         update(2*i, l, m, ql, qr, x);
         update(2*i+1, m+1, r, ql, qr, x);
         t[i] = t[2*i] + t[2*i+1];
+    }
+
+    void update(int ql, int qr, int delta){
+        return (void)update(1,0,N-1,ql,qr,delta);
     }
 };
 int main(){

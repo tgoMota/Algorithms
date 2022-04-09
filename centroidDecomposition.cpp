@@ -2,8 +2,6 @@
 //Runs in O(NlogN) time complexity
 #include <bits/stdc++.h>
 using namespace std;
-#define oo 0x3f3f3f3f
-#define fastio() ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 
 struct CentroidDecomposition{
   int N;
@@ -36,7 +34,7 @@ struct CentroidDecomposition{
 
   int getCentroid(int v, int p, int n){
     for(int x : tree[v]){
-      if(!isCentroid[x] && x != p && 2*size[x] >= n) return getCentroid(x, v, n);
+      if(x!=p && !isCentroid[x] && 2*size[x] >= n) return getCentroid(x, v, n);
     }
     return v;
   }
@@ -66,6 +64,12 @@ int main(){
   int n;
   cin >> n;
   CentroidDecomposition cd(n);
+  for(int i = 0; i < n-1 ; ++i){
+    int u, v;
+    cin >> u >> v;
+    cd.add_edge(u,v);
+  }
   int root = cd.decomposeTree(0);
+  cout << root << '\n';
   return 0;
 }
