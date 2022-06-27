@@ -13,9 +13,9 @@ int Aug(int l) {
   return 0;
 }
  
-int kuhn(const int n){
+int kuhn(const int n, const int m){ //n => size of left side //m => size of right side
   int ans = 0;
-  match.assign(n+1, -1);
+  match.assign(m+1, -1);
   for (int l = 0; l < n ;l++) { //0-indexed //if 1-indexed change to (l = 1; l <= n ; l++)
     vst.assign(n+1, 0);
     ans += Aug(l);
